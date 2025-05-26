@@ -16,6 +16,12 @@ function Header() {
     const pathname = usePathname();
 
     const user = true; // Replace with actual user authentication logic
+
+    function googleSignIn() : Promise<void>{
+    return new Promise(() => {
+        window.location.href = "http://localhost:8080/auth/google";
+    });
+}
     
     return (
         <header className='sticky px-4 top-0 z-50 w-full border-b bg-background/95 backdrop-blur'>
@@ -44,7 +50,7 @@ function Header() {
 
                 <div className='flex flex-1 items-center justify-between space-x-2 md:justify-end'>
                     <div className='w-full flex-1 md:w-auto md:flex-none space-x-2 hidden md:flex'>
-                        <Button>Get Started</Button>
+                        <Button onClick={googleSignIn}>Get Started</Button>
 
                     </div>
                 </div>
