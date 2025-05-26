@@ -1,0 +1,21 @@
+import express from 'express';
+import passport from 'passport';
+
+const router = express.Router();
+
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email'],
+}));
+
+router.get('/google/callback', 
+// if authentication fails, redirect to login
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect to the dashboard
+    res.redirect(`${process.env.CLIENT_URL}/dashboard`);
+  }
+);
+
+export default router;
+
+
