@@ -4,7 +4,7 @@ export interface IUser extends Document {
     googleId: string;
     email: string;
     displayName: string;
-    profilePicture: boolean;
+    profilePicture: string;
 }
 
 const UserSchema: Schema = new Schema({
@@ -22,9 +22,7 @@ const UserSchema: Schema = new Schema({
         type: String,
         required: true,
     },
-    profilePicture: {
-        type: Boolean,
-    },
+    profilePicture: { type: String },
 }, );
 
 export default model<IUser>("User", UserSchema);
