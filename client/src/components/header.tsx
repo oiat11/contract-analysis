@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation';
 import React from 'react'
 import { cn } from "@/lib/utils"; 
-import { Button } from './ui/button';
+import { UserButton } from './shared/user-button';
 
 const navItems: { name: string; href: string }[] = [
   { name: "Dashboard", href: "/dashboard" },
@@ -14,14 +14,6 @@ const navItems: { name: string; href: string }[] = [
 
 function Header() { 
     const pathname = usePathname();
-
-    const user = true; // Replace with actual user authentication logic
-
-    function googleSignIn() : Promise<void>{
-    return new Promise(() => {
-        window.location.href = "http://localhost:8080/auth/google";
-    });
-}
     
     return (
         <header className='sticky px-4 top-0 z-50 w-full border-b bg-background/95 backdrop-blur'>
@@ -47,16 +39,11 @@ function Header() {
                         ))}
                     </nav>
                 </div>
+                <UserButton />
 
-                <div className='flex flex-1 items-center justify-between space-x-2 md:justify-end'>
-                    <div className='w-full flex-1 md:w-auto md:flex-none space-x-2 hidden md:flex'>
-                        <Button onClick={googleSignIn}>Get Started</Button>
-
-                    </div>
-                </div>
             </div>
         </header>
     )
 }
 
-export default Header; // 导出时也使用 PascalCases
+export default Header;

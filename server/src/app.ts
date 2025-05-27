@@ -21,10 +21,19 @@ mongoose.connect(process.env.MONGODB_URI as string).then(() => {
 });
 
 // Middleware setup
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL, // Allow requests from the client URL
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+}
+));
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
+
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.originalUrl}`);
+  next();
+});
 
 // use express-session with MongoDB store to handle sessions
 app.use(session({
